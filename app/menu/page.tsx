@@ -142,7 +142,7 @@ export default function MenuPage() {
                               {item.name}
                             </h3>
                             <span className="text-primary font-bold text-lg whitespace-nowrap">
-                              ${Number(item.price).toFixed(2)}
+                              Ksh{Number(item.price).toFixed(2)}
                             </span>
                           </div>
                           {item.description && (

@@ -112,7 +112,7 @@ export default function RoomsPage() {
                           </div>
                           <div className="text-right">
                             <span className="text-2xl font-bold text-primary">
-                              ${Number(room.price_per_night).toFixed(0)}
+                              Ksh{Number(room.price_per_night).toFixed(0)}
                             </span>
                             <p className="text-xs text-muted-foreground">per night</p>
                           </div>
@@ -173,7 +173,7 @@ export default function RoomsPage() {
                           </h3>
                           {service.price !== null && (
                             <span className="text-primary font-semibold whitespace-nowrap">
-                              ${Number(service.price).toFixed(0)}
+                              Ksh{Number(service.price).toFixed(0)}
                             </span>
                           )}
                         </div>
