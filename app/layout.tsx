@@ -8,7 +8,7 @@ const _geist = Geist({ subsets: ["latin"] });
 const _geistMono = Geist_Mono({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: 'ComfyInn - Digital Menu & Room Rates',
+  title: 'ComfyInn Eldoret - Digital Menu & Room Rates',
   description: 'Explore our restaurant menu and room rates at ComfyInn - Comfort Meets Class',
   generator: 'v0.app',
   icons: {

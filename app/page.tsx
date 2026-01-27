@@ -14,12 +14,6 @@ function LandingContent() {
           <div className="flex items-center gap-3">
             <Image src="/logo.png" alt="ComfyInn Logo" width={60} height={60} />
           </div>
-          <Link
-            href="/rates-admin"
-            className="text-sm text-muted-foreground hover:text-foreground transition-colors"
-          >
-            Admin
-          </Link>
         </div>
       </header>
 
@@ -89,7 +83,7 @@ function LandingContent() {
         {/* Footer Info */}
         <div className="text-center mt-16 text-muted-foreground">
           <p className="text-sm">
-            Scan the QR code to access our digital services
+            Enjoy your stay at ComfyInn Eldoret
           </p>
         </div>
       </main>
