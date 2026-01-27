@@ -258,7 +258,7 @@ export default function ItemsPage() {
                 <div className="p-4">
                   <div className="flex items-start justify-between gap-2 mb-2">
                     <h3 className="font-semibold text-foreground">{item.name}</h3>
-                    <span className="text-primary font-bold">${Number(item.price).toFixed(2)}</span>
+                    <span className="text-primary font-bold">Ksh{Number(item.price).toFixed(2)}</span>
                   </div>
                   <p className="text-muted-foreground text-sm line-clamp-2 mb-3">{item.description}</p>
                   <div className="flex items-center justify-between">
@@ -323,7 +323,7 @@ export default function ItemsPage() {
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div className="grid gap-2">
-                  <Label htmlFor="price">Price ($)</Label>
+                  <Label htmlFor="price">Price (Ksh)</Label>
                   <Input
                     id="price"
                     type="number"

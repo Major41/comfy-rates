@@ -249,7 +249,7 @@ export default function RoomsPage() {
                       </div>
                     </div>
                     <div className="text-right">
-                      <span className="text-xl font-bold text-primary">${Number(room.price_per_night).toFixed(0)}</span>
+                      <span className="text-xl font-bold text-primary">Ksh{Number(room.price_per_night).toFixed(0)}</span>
                       <p className="text-muted-foreground text-xs">per night</p>
                     </div>
                   </div>
@@ -321,7 +321,7 @@ export default function RoomsPage() {
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div className="grid gap-2">
-                  <Label htmlFor="price">Price per Night ($)</Label>
+                  <Label htmlFor="price">Price per Night (Ksh)</Label>
                   <Input
                     id="price"
                     type="number"
