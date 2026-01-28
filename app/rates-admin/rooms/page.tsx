@@ -33,18 +33,13 @@ import { ImageUpload } from "@/components/image-upload";
 import type { Room } from "@/lib/db";
 
 const PRESET_AMENITIES = [
-  "WiFi",
+  "High-Speed Wifi",
   "Breakfast",
   "TV",
-  "Air Conditioning",
-  "Mini Bar",
+  "Lunch",
   "Room Service",
-  "Gym Access",
-  "Pool Access",
-  "Spa Access",
-  "City View",
-  "Balcony",
-  "Kitchen",
+  "Dinner",
+  "Luxury Bedding",
 ];
 
 export default function RoomsPage() {
