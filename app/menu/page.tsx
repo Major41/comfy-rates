@@ -3,15 +3,26 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowLeft, UtensilsCrossed, Loader2 } from "lucide-react";
+import { ArrowLeft, UtensilsCrossed, Loader2, Filter } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+  DropdownMenuItem,
+} from "@/components/ui/dropdown-menu";
 import type { Category, MenuItem } from "@/lib/db";
 
 export default function MenuPage() {
   const [categories, setCategories] = useState<Category[]>([]);
   const [menuItems, setMenuItems] = useState<MenuItem[]>([]);
   const [loading, setLoading] = useState(true);
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(
+    "all",
+  );
 
   useEffect(() => {
     async function fetchData() {
@@ -35,8 +46,20 @@ export default function MenuPage() {
 
   const getItemsByCategory = (categoryId: number) => {
     return menuItems.filter(
-      (item) => item.category_id === categoryId && item.is_available
+      (item) => item.category_id === categoryId && item.is_available,
     );
+  };
+
+  // Filter categories based on selection
+  const filteredCategories =
+    selectedCategory === "all"
+      ? categories
+      : categories.filter((cat) => cat.name === selectedCategory);
+
+  // Function to get category name by ID
+  const getCategoryName = (categoryId: number) => {
+    const category = categories.find((cat) => cat.id === categoryId);
+    return category ? category.name : "Unknown";
   };
 
   if (loading) {
@@ -52,35 +75,147 @@ export default function MenuPage() {
       {/* Header */}
       <header className="sticky top-0 z-50 bg-card/95 backdrop-blur supports-[backdrop-filter]:bg-card/80 border-b border-border">
         <div className="container mx-auto px-4 py-4">
-          <div className="flex items-center gap-4">
-            <Link href="/">
-              <Button variant="ghost" size="icon" className="shrink-0">
-                <ArrowLeft className="h-5 w-5" />
-              </Button>
-            </Link>
-            <div className="flex items-center gap-3">
-              <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center">
-                <UtensilsCrossed className="h-5 w-5 text-primary" />
+          <div className="flex items-center justify-between gap-4">
+            <div className="flex items-center gap-4">
+              <Link href="/">
+                <Button variant="ghost" size="icon" className="shrink-0">
+                  <ArrowLeft className="h-5 w-5" />
+                </Button>
+              </Link>
+              <div className="flex items-center gap-3">
+                <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center">
+                  <UtensilsCrossed className="h-5 w-5 text-primary" />
+                </div>
+                <div>
+                  <h1 className="font-semibold text-foreground">
+                    Restaurant Menu
+                  </h1>
+                  <p className="text-xs text-muted-foreground">
+                    ComfyInn Dining
+                  </p>
+                </div>
               </div>
-              <div>
-                <h1 className="font-semibold text-foreground">Restaurant Menu</h1>
-                <p className="text-xs text-muted-foreground">ComfyInn Dining</p>
-              </div>
+            </div>
+
+            {/* Filter Button */}
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="outline" size="sm" className="gap-2">
+                  <Filter className="h-4 w-4" />
+                  Filter by Category
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end" className="w-56">
+                <DropdownMenuLabel>Select Category</DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem
+                  onClick={() => setSelectedCategory("all")}
+                  className={selectedCategory === "all" ? "bg-accent" : ""}
+                >
+                  All Categories
+                </DropdownMenuItem>
+                {categories.map((category) => (
+                  <DropdownMenuItem
+                    key={category.id}
+                    onClick={() => setSelectedCategory(category.name)}
+                    className={
+                      selectedCategory === category.name ? "bg-accent" : ""
+                    }
+                  >
+                    {category.name}
+                  </DropdownMenuItem>
+                ))}
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </div>
+
+          {/* Category Filter Display */}
+          <div className="mt-4">
+            <div className="flex flex-wrap items-center gap-2">
+              <span className="text-sm text-muted-foreground">Showing:</span>
+              {selectedCategory === "all" ? (
+                <Badge variant="default" className="text-sm">
+                  All Categories
+                </Badge>
+              ) : (
+                <Badge variant="secondary" className="text-sm">
+                  {selectedCategory}
+                </Badge>
+              )}
+              {selectedCategory !== "all" && (
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="h-6 px-2 text-xs"
+                  onClick={() => setSelectedCategory("all")}
+                >
+                  Clear filter
+                </Button>
+              )}
             </div>
           </div>
         </div>
       </header>
 
       <main className="container mx-auto px-4 py-6">
-        {categories.length === 0 ? (
+        {filteredCategories.length === 0 ? (
           <div className="text-center py-12">
             <UtensilsCrossed className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
-            <p className="text-muted-foreground">No menu items available</p>
+            <p className="text-muted-foreground">
+              No menu items available for this category
+            </p>
+            <Button
+              variant="outline"
+              className="mt-4"
+              onClick={() => setSelectedCategory("all")}
+            >
+              Show All Categories
+            </Button>
           </div>
         ) : (
           <div className="space-y-10">
-            {categories.map((category) => {
+            {filteredCategories.map((category) => {
               const items = getItemsByCategory(category.id);
+              if (items.length === 0 && selectedCategory !== "all") return null;
+
+              // Show category header even if no items when viewing all categories
+              if (items.length === 0 && selectedCategory === "all") {
+                return (
+                  <section key={category.id} className="space-y-4">
+                    <div className="relative rounded-xl overflow-hidden h-48 md:h-64">
+                      {category.image_url ? (
+                        <Image
+                          src={category.image_url || "/placeholder.svg"}
+                          alt={category.name}
+                          fill
+                          className="object-cover"
+                        />
+                      ) : (
+                        <div className="w-full h-full bg-muted flex items-center justify-center">
+                          <UtensilsCrossed className="h-16 w-16 text-muted-foreground/50" />
+                        </div>
+                      )}
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+                      <div className="absolute bottom-0 left-0 right-0 p-4 md:p-6">
+                        <h2 className="text-2xl md:text-3xl font-bold text-white">
+                          {category.name}
+                        </h2>
+                        {category.description && (
+                          <p className="text-white/80 text-sm md:text-base mt-1">
+                            {category.description}
+                          </p>
+                        )}
+                      </div>
+                    </div>
+                    <div className="text-center py-8">
+                      <p className="text-muted-foreground">
+                        No items available in this category
+                      </p>
+                    </div>
+                  </section>
+                );
+              }
+
               if (items.length === 0) return null;
 
               return (
