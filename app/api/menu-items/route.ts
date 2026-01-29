@@ -1,3 +1,5 @@
+// api/menu-items/route.ts
+
 import { NextRequest, NextResponse } from "next/server";
 import { getMenuItems, createMenuItem } from "@/lib/db";
 
