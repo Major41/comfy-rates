@@ -467,12 +467,10 @@ export default function ConferenceRatesPage() {
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <Button variant="default" className="gap-2">
-                <span>📞</span>
-                Call: +254 700 000 000
+                Call: +254 703 696 692
               </Button>
               <Button variant="outline" className="gap-2">
-                <span>✉️</span>
-                Email: events@comfyinn.com
+                Email: info@comfyinneldoret.com
               </Button>
             </div>
           </CardContent>
