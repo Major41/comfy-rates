@@ -130,7 +130,7 @@ export default function ConferenceRatesPage() {
       name: "Tea & Snacks Meeting",
       description: "Refreshments for meetings and conferences",
       pricePerPerson: 500,
-      includes: ["Tea & coffee station", "Assorted snacks", "Bottled water", "Fresh juices"],
+      includes: ["Tea & coffee station", "Assorted snacks"],
       icon: <Coffee className="h-5 w-5" />,
       timing: "Throughout the day",
     },
@@ -138,7 +138,7 @@ export default function ConferenceRatesPage() {
       name: "Breakfast Meeting",
       description: "Complete breakfast buffet",
       pricePerPerson: 1200,
-      includes: ["Full breakfast buffet", "Fresh juices", "Tea & coffee bar", "Pastries & fruits"],
+      includes: ["Full breakfast buffet", "Pastries & fruits"],
       icon: <Sun className="h-5 w-5" />,
       timing: "7:00 AM - 10:00 AM",
     },
@@ -439,7 +439,7 @@ export default function ConferenceRatesPage() {
                     {catering.description}
                   </p>
                   
-                  <div className="space-y-2">
+                  {/* <div className="space-y-2">
                     <h4 className="text-sm font-medium">Includes:</h4>
                     <ul className="space-y-1">
                       {catering.includes.map((item, index) => (
@@ -449,7 +449,7 @@ export default function ConferenceRatesPage() {
                         </li>
                       ))}
                     </ul>
-                  </div>
+                  </div> */}
                 </CardContent>
               </Card>
             ))}
