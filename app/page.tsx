@@ -90,7 +90,7 @@ function LandingContent() {
                   <div className="flex items-center justify-between">
                     <div>
                       <h3 className="text-xl font-semibold text-foreground mb-2">
-                        Conference Halls
+                        Conference Packages
                       </h3>
                       <p className="text-muted-foreground">
                         Perfect venues for your events
