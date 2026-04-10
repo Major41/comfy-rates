@@ -252,10 +252,6 @@ export default function ConferenceRatesPage() {
                     </div>
                     <div>
                       <CardTitle>{pkg.name}</CardTitle>
-                      <div className="flex items-center gap-2 mt-1">
-                        <Clock className="h-3 w-3 text-muted-foreground" />
-                        <span className="text-sm text-muted-foreground">{pkg.duration}</span>
-                      </div>
                     </div>
                   </div>
                 </CardHeader>
@@ -317,22 +313,6 @@ export default function ConferenceRatesPage() {
                       {hall.capacity}
                     </Badge>
                   </div>
-                  
-                  {/* Premium/Featured Badge
-                  {hall.featured && (
-                    <div className="absolute top-3 left-3">
-                      <Badge className="bg-yellow-500 hover:bg-yellow-600 border-0">
-                        ⭐ Featured
-                      </Badge>
-                    </div>
-                  )}
-                  {hall.premium && (
-                    <div className="absolute top-3 right-3">
-                      <Badge variant="default" className="bg-purple-600">
-                        Premium
-                      </Badge>
-                    </div>
-                  )} */}
                 </div>
                 
                 <CardContent className="p-5">
@@ -340,10 +320,6 @@ export default function ConferenceRatesPage() {
                   <div className="mb-4">
                     <div className="flex items-center justify-between mb-2">
                       <h3 className="font-bold text-lg text-foreground">{hall.name}</h3>
-                      <div className="flex items-center gap-1 text-sm text-muted-foreground">
-                        <Maximize2 className="h-3 w-3" />
-                        <span>{hall.dimensions}</span>
-                      </div>
                     </div>
                     
                     {/* Price */}
@@ -352,7 +328,7 @@ export default function ConferenceRatesPage() {
                         Ksh{hall.price.toLocaleString()}
                       </div>
                       <p className="text-xs text-muted-foreground">
-                        Full day hire (8 hours)
+                        Full day hire
                       </p>
                     </div>
                   </div>
@@ -438,18 +414,6 @@ export default function ConferenceRatesPage() {
                   <p className="text-sm text-muted-foreground mb-3">
                     {catering.description}
                   </p>
-                  
-                  {/* <div className="space-y-2">
-                    <h4 className="text-sm font-medium">Includes:</h4>
-                    <ul className="space-y-1">
-                      {catering.includes.map((item, index) => (
-                        <li key={index} className="flex items-center gap-2 text-xs">
-                          <CheckCircle className="h-3 w-3 text-green-500" />
-                          {item}
-                        </li>
-                      ))}
-                    </ul>
-                  </div> */}
                 </CardContent>
               </Card>
             ))}
