@@ -62,7 +62,7 @@ function LandingContent() {
               <CardContent className="p-0">
                 <div className="h-48 relative">
                   <Image
-                    src="/room.jpg"
+                    src="/well.jpg"
                     alt="Room"
                     fill
                     className="object-cover group-hover:scale-105 transition-transform duration-300"
